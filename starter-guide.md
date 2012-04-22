@@ -1,6 +1,14 @@
 #Starters' Guide to Packfire Framework for PHP
 
-Status: Work-In-Progress
+**Authors**:
+
+  - Sam-Mauris Yong &lt;mauris*@*hotmail.sg&gt;
+
+**Status**: Work-In-Progress  
+
+Copyright © 2010-2012, Sam-Mauris Yong. All rights reserved. 
+
+This work is digitally released in the form of a computer file under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License](http://creativecommons.org/licenses/by-nc-nd/3.0/). Redistribution of this file through digital means is permitted provided that this copyright notice, license notice and this paragraph is retained in the copies.
 
 ##Content
 
@@ -17,13 +25,13 @@ Status: Work-In-Progress
 
 ##<a name="guide-preface"></a>Preface
 
-Thank you for taking time to start on your development journey with Packfire Framework for PHP.
+**Thank you** for taking time to start on your development journey with Packfire Framework for PHP.
 
 In this book *Starters' Guide to Packfire Framework for PHP*, you can expect great help and guidance to get you started in developing your application for the vast cloud and network of Internet. The goal of this book is simple:
 
 >To get developers started on building web and back-end applications using Packfire Framework and PHP Programming Language.  
 
-This book requires you to have some form of knowledge and basic foundation of programming to be able follow smoothly. If you come from another programming language (such as C#, Java or Python), you will be able to progress much faster with your programming knowledge set. 
+This book requires you to have some form of knowledge and basic foundation of programming to be able follow smoothly. If you come from another programming language (such as C#, Java or Python), you will be able to progress much faster with your current programming knowledge set. 
 
 ##<a name="guide-intro"></a>Introduction
 
