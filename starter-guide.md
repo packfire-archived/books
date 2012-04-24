@@ -21,7 +21,12 @@ This work is digitally released in the form of a computer file under the [Creati
    1. [Downloading Packfire](#guide-install-1)
    2. [Copying Files](#guide-install-2)
    3. [Setting Framework Path](#guide-install-3)
- 5. Configurating your application
+ 5. [Configurating your application](#guide-configure)
+   1. Configuration Formats
+   2. Contextual Configuration Loading
+   3. app.yml Configuration File
+   4. ioc.yml Configuration File
+   5. routing.yml Configuration File
  6. Model-View-Controllers
    1. Controllers
    2. Views
@@ -86,8 +91,10 @@ Then, copy the application structure of the **public** folder to your web server
 
 ###<a name="guide-install-3"></a>Step 3 - Setting the Framework Path
 
- 1. Open the `index.php` file, found in the root folder of your application, with your favourite PHP editor. 
+ 1. Open the `index.php` file, found in the root folder of your application, with your favourite PHP editor. The `index.php` file is called the Application Front Controller.
  2. Modify the `__PACKFIRE_PATH__` constant and set it to where you put your **packfire** framework folder.
+
+>**Application Front Controller**: Packfire uses the Front Controller Pattern (FCP) to route all requests to the web application into a single file and hence allowing you to control all your URL routings through PHP without knowledge of writing and need to maintaining the `.htaccess` file. 
 
 For example if I put my framework folder to 'C:\apps\packfire', I would set my `__PACKFIRE_PATH__` constant to 'C:\apps\packfire' and it would look like this:
 
@@ -95,7 +102,75 @@ For example if I put my framework folder to 'C:\apps\packfire', I would set my `
 
 ###Installaton Done!
 
-Now that you have completed the 3 steps of installation, you should be able to open Packfire on your browser and a welcome screen will show up:
+Congratulations! Now that you have completed the 3 steps of installation, you should be able to open Packfire on your browser and a welcome screen will show up:
 
 >![Packfire Framework Welcome Screen](http://i.imgur.com/38nQw.png)  
 Packfire Framework Welcome Screen
+
+##<a name="#guide-configure"></a>Configurating your application
+
+Packfire Framework is designed to require minimal configuration and reduces the need for you to use the command line to perform configuration, tweaking and application hardening.
+
+Your configuration files are found in the 'pack/config' folder. 
+
+###Configuration Formats
+
+Packfire is currently able to read the following configuration formats:
+
+ - YAML (*.yml, *.yaml)
+ - INI Configuration File Format (*.ini)
+ - PHP File that returns an array (*.php)
+
+###Contextual Configuration Loading
+
+Packfire understands that your application will tend to go through several phases of design, development and testing and therefore will require very different configuration for each of the machine environment. 
+
+In the Application Front Controller, there is a line that defines the `__ENVIRONMENT__` constant.
+
+    define('__ENVIRONMENT__' , '');
+
+You can modify the constant according to where the application is currently located. For example, 'local' for local development server and 'test' for the test server.
+
+Whenever an environment is specified, the configuration file set for the environment will be loaded instead of the default one. For example if the environment is set to 'test', Packfire will look for and load 'app.test.yml' first. If the contextual configuration file is not found, it will fallback to load the default one, i.e. 'app.yml'.
+
+###app.yml Configuration File
+
+`app.yml` configuration file contains the application configuration settings. Database configuration also resides in this file. 
+	
+###ioc.yml Configuration File
+
+The `ioc.yml` configuration file sets all the services that will be loaded into the IoC Service Bucket whenever the application runs. These services will be accessible to all your controllers and classes use the IoC service bucket.
+
+Each entry in the IoC configuration file is defined as:
+
+	serviceName:
+	  class: packageClassPath
+	  parameters:
+	    - param1
+	    - param2
+
+The service can then be loaded from the service bucket through `$this->service('serviceName')`. Any service loaded into the bucket that requires the use of the bucket will be provided the access to do so.
+
+###routing.yml Configuration File
+You can manage all your URL route definitions in the `routing.yml` configuration file. An example of a route entry in the routing configuration file:
+
+    home: 
+      rewrite: "/"
+      actual: "Home"
+    themeSwitch:
+      rewrite: "/theme/switch/{theme}"
+      actual: "ThemeSwitch:switch"
+      method: 
+	- get
+        - post
+      params:
+        theme: "([a-zA-Z0-9]+)"
+
+- `themeSwitch`: this is the routing key, which uniquely identifies the routing entry.
+- `rewrite`: the rewritten URL. You can enter parameters in the URL like templates.
+- `actual`: The actual controller and action to be executed. You can leave out the "Controller" at the end of the class name. The `:` separates the class name and the action name. The action name is optional and if left out the default action name "index" is used.
+- `method`: The HTTP method that the route is catered for. 
+- `params`: The hash map of parameters with its regular expression.
+
+The routing package in Packfire is powerful. Each parameter is parsed with regular expressions, which allows you to filter and validate your input data in the URL at the first stage.
+
