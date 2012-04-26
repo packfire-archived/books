@@ -22,11 +22,11 @@ This work is digitally released in the form of a computer file under the [Creati
    2. [Copying Files](#guide-install-2)
    3. [Setting Framework Path](#guide-install-3)
  5. [Configurating your application](#guide-configure)
-   1. Configuration Formats
-   2. Contextual Configuration Loading
-   3. app.yml Configuration File
-   4. ioc.yml Configuration File
-   5. routing.yml Configuration File
+   1. [Configuration Formats](#guide-configure-1)
+   2. [Contextual Configuration Loading](#guide-configure-2)
+   3. [app.yml Configuration File](#guide-configure-3)
+   4. [ioc.yml Configuration File](#guide-configure-4)
+   5. [routing.yml Configuration File](#guide-configure-5)
  6. Model-View-Controllers
    1. Controllers
    2. Views
@@ -107,13 +107,13 @@ Congratulations! Now that you have completed the 3 steps of installation, you sh
 >![Packfire Framework Welcome Screen](http://i.imgur.com/38nQw.png)  
 Packfire Framework Welcome Screen
 
-##<a name="#guide-configure"></a>Configurating your application
+##<a name="guide-configure"></a>Configurating your application
 
 Packfire Framework is designed to require minimal configuration and reduces the need for you to use the command line to perform configuration, tweaking and application hardening.
 
 Your configuration files are found in the 'pack/config' folder. 
 
-###Configuration Formats
+###<a name="guide-configure-1"></a>Configuration Formats
 
 Packfire is currently able to read the following configuration formats:
 
@@ -121,7 +121,7 @@ Packfire is currently able to read the following configuration formats:
  - INI Configuration File Format (*.ini)
  - PHP File that returns an array (*.php)
 
-###Contextual Configuration Loading
+###<a name="guide-configure-2"></a>Contextual Configuration Loading
 
 Packfire understands that your application will tend to go through several phases of design, development and testing and therefore will require very different configuration for each of the machine environment. 
 
@@ -133,11 +133,11 @@ You can modify the constant according to where the application is currently loca
 
 Whenever an environment is specified, the configuration file set for the environment will be loaded instead of the default one. For example if the environment is set to 'test', Packfire will look for and load 'app.test.yml' first. If the contextual configuration file is not found, it will fallback to load the default one, i.e. 'app.yml'.
 
-###app.yml Configuration File
+###<a name="guide-configure-3"></a>app.yml Configuration File
 
 `app.yml` configuration file contains the application configuration settings. Database configuration also resides in this file. 
 	
-###ioc.yml Configuration File
+###<a name="guide-configure-4"></a>ioc.yml Configuration File
 
 The `ioc.yml` configuration file sets all the services that will be loaded into the IoC Service Bucket whenever the application runs. These services will be accessible to all your controllers and classes use the IoC service bucket.
 
@@ -151,7 +151,7 @@ Each entry in the IoC configuration file is defined as:
 
 The service can then be loaded from the service bucket through `$this->service('serviceName')`. Any service loaded into the bucket that requires the use of the bucket will be provided the access to do so.
 
-###routing.yml Configuration File
+###<a name="guide-configure-5"></a>routing.yml Configuration File
 You can manage all your URL route definitions in the `routing.yml` configuration file. An example of a route entry in the routing configuration file:
 
     home: 
