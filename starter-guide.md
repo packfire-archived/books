@@ -27,10 +27,12 @@ This work is digitally released in the form of a computer file under the [Creati
    3. [app.yml Configuration File](#guide-configure-3)
    4. [ioc.yml Configuration File](#guide-configure-4)
    5. [routing.yml Configuration File](#guide-configure-5)
- 6. Model-View-Controllers
-   1. Controllers
-   2. Views
-   3. Models
+ 6. [Model-View-Controller Architecture](#guide-mvc)
+   1. [Models](#guide-mvc-models)
+   2. [Views](#guide-mvc-views)
+   3. [Controllers](#guide-mvc-controllers)
+ 7. What's next?
+ 8. Glossary
 
 
 ##<a name="guide-preface"></a>Preface
@@ -135,7 +137,7 @@ Whenever an environment is specified, the configuration file set for the environ
 
 ###<a name="guide-configure-3"></a>app.yml Configuration File
 
-`app.yml` configuration file contains the application configuration settings. Database configuration also resides in this file. 
+`app.yml` configuration file contains the application, session and database configuration settings.
 	
 ###<a name="guide-configure-4"></a>ioc.yml Configuration File
 
@@ -149,7 +151,7 @@ Each entry in the IoC configuration file is defined as:
 	    - param1
 	    - param2
 
-The service can then be loaded from the service bucket through `$this->service('serviceName')`. Any service loaded into the bucket that requires the use of the bucket will be provided the access to do so.
+The service can then be loaded from the service bucket through `$this->service('serviceName')` in your controller or view. Any service loaded into the bucket that requires the use of the bucket will be provided the access to do so.
 
 ###<a name="guide-configure-5"></a>routing.yml Configuration File
 You can manage all your URL route definitions in the `routing.yml` configuration file. An example of a route entry in the routing configuration file:
@@ -174,3 +176,28 @@ You can manage all your URL route definitions in the `routing.yml` configuration
 
 The routing package in Packfire is powerful. Each parameter is parsed with regular expressions, which allows you to filter and validate your input data in the URL at the first stage.
 
+##<a name="guide-mvc"></a>Model-View-Controller Architecture
+
+Model-View-Controller (MVC) is a system architectural design that focuses on Separation of Concerns. MVC is commonly found in many frameworks and system, such as Microsoft .NET Framework, Java Server Pages and Symfony2 Framework. MVC helps to break down large web applications into smaller re-usable components so as to conform to the best practices of Object-Oriented Programming. No matter how big or small your application is, MVC is a good way to develop your application for scalability.
+
+Packfire is designed to be a Push MVC framework. Take a look at the diagram below to understand how MVC is designed in Packfire.
+
+![Packfire MVC Architectural Design](http://i.imgur.com/v7yGDl.png)
+
+###<a name="guide-mvc-models"></a>Models
+
+Models are classes that holds your application knowledge and data. They can form relationships between each other to make your application data more interesting. You can think of them as entities and objects that your controller can work on and manipulate.
+
+>The model is a collection of classes that form a software application intended to store, and optionally separate, data.  
+>  
+> -- [Model–view–controller, Wikipedia](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
+
+For example, in the case of a web-based library, you may find the `Book` class as a Model for a physical book, storing the book title, `Author` object and ISBN number.
+
+###<a name="guide-mvc-views"></a>Views
+
+To help you manage your application's view classes easily, Packfire has included functionalities that allow you to create and reuse view. The `pView` abstract class prepares the data loaded by the controller for the template to parse.
+
+The View component of Packfire separates your View manipulation logic and HTML code, which allows web designers and developers to work on front-end development with more ease and haste as PHP view formatting codes are isolated from the HTML code.
+
+###<a name="guide-mvc-controllers"></a>Controllers
