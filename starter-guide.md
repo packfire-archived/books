@@ -194,6 +194,18 @@ Models are classes that holds your application knowledge and data. They can form
 
 For example, in the case of a web-based library, you may find the `Book` class as a Model for a physical book, storing the book title, `Author` object and ISBN number.
 
+In Packfire, you can place your Models in the `pack/model` folder. This will allow your controller to load the models through the `model()` method. You can write the following code in your Controller to load your models.
+
+    $instance = $this->model('Book');
+
+Subsequently after loading the model, you can create additional instances through the standard PHP `new` keyword in your Controller:
+
+    $this->model('Book');
+    $book = new Book(); // Book is your model class placed as 'pack/model/Book.php'
+    $book->title = $this->params()->get('title');
+    $book->authorId = $this->params()->get('authorId');
+    Book::save($book);
+
 ###<a name="guide-mvc-views"></a>Views
 
 To help you manage your application's view classes easily, Packfire has included functionalities that allow you to create and reuse view. The `pView` abstract class prepares the data loaded by the controller for the template to parse.
@@ -201,3 +213,7 @@ To help you manage your application's view classes easily, Packfire has included
 The View component of Packfire separates your View manipulation logic and HTML code, which allows web designers and developers to work on front-end development with more ease and haste as PHP view formatting codes are isolated from the HTML code.
 
 ###<a name="guide-mvc-controllers"></a>Controllers
+
+The controller is the heart of your web application. In your controllers lie the logic and actions that interact with the users' requests. You can use the routing functionalities to direct URL requests to controllers and its actions.
+
+Controllers interact with your application models, database, users authentication, set data to views and implement functionalities for your application.
