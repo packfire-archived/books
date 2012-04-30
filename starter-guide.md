@@ -29,7 +29,10 @@ This work is digitally released in the form of a computer file under the [Creati
    5. [routing.yml Configuration File](#guide-configure-5)
  6. [Model-View-Controller Architecture](#guide-mvc)
    1. [Models](#guide-mvc-models)
+     1. [Example](#guide-mvc-models-example)
    2. [Views](#guide-mvc-views)
+     1. [Templates](#guide-mvc-templates)
+     2. [Themes](#guide-mvc-themes)
    3. [Controllers](#guide-mvc-controllers)
  7. What's next?
  8. Glossary
@@ -192,6 +195,8 @@ Models are classes that holds your application knowledge and data. They can form
 >  
 > -- [Model–view–controller, Wikipedia](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 
+####<a name="guide-mvc-models-example"></a>Example
+
 For example, in the case of a web-based library, you may find the `Book` class as a Model for a physical book, storing the book title, `Author` object and ISBN number.
 
 In Packfire, you can place your Models in the `pack/model` folder. This will allow your controller to load the models through the `model()` method. You can write the following code in your Controller to load your models.
@@ -211,6 +216,53 @@ Subsequently after loading the model, you can create additional instances throug
 To help you manage your application's view classes easily, Packfire has included functionalities that allow you to create and reuse view. The `pView` abstract class prepares the data loaded by the controller for the template to parse.
 
 The View component of Packfire separates your View manipulation logic and HTML code, which allows web designers and developers to work on front-end development with more ease and haste as PHP view formatting codes are isolated from the HTML code.
+
+####<a name="guide-mvc-templates"></a>Templates
+
+Packfire adopts the Mustache project for a logic-less template rendering engine by default. Writing templates for Packfire does not make things difficult for the designer and the developer, as the templates are clearly separated from the view logic. 
+
+>![Packfire Moustache](http://i.imgur.com/HQo3a.png)  
+> Packfire Moustache: lightweight logic-less template rendering engine.
+
+You can read more about Mustache and how to use it through the Mustache [manual(1)](http://mustache.github.com/mustache.1.html) and [manual(5)](http://mustache.github.com/mustache.5.html) pages.
+
+> Packfire calls for and has a strong stance on [View-Template Separation](http://packfire.tumblr.com/post/21211626941/view-template-separation). Read more about it on [our development blog](http://packfire.tumblr.com/).
+
+You can set the template to render in your `pView` class by calling the `template()` method:
+
+    $this->template(new pMoustacheTemplate($templateFile));
+
+or if you use the `AppView` class:
+
+    $this->template('userPage'); 
+    // loads the template file at /pack/template/userPage.html
+
+####<a name="guide-mvc-themes"></a>Themes
+
+Packfire View Themes make it easy to switch your website's look and feel easily by implementing themes. You can switch themes for different occasions such as New Year, April Fool's, Halloween, Christmas, etc, or switch based on the user's colour preferences.
+
+You can define your theme classes in the '/pack/theme' folder, extending from `pTheme`.
+
+The concept is simple: All your themes will define the variables required to constitute your theme, for example background colour. So in your theme classes:
+
+-- DarkTheme:
+
+    $this->define('backgroundClr', '#666');
+    $this->define('foregroundClr', '#FFF');
+
+-- LightTheme:
+
+    $this->define('backgroundClr', '#DDD');
+    $this->define('foregroundClr', '#222');
+
+To put these variables onto your template, simply use the `theme.{variable}` tags, for example using Moustache:
+
+    <style type="text/css">
+        body{
+            background-color:{{theme.backgroundClr}};
+            color:{{theme.foregroundClr}};
+        }
+    </style>
 
 ###<a name="guide-mvc-controllers"></a>Controllers
 
