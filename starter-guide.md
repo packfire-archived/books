@@ -57,7 +57,7 @@ In this book *Starters' Guide to Packfire Framework for PHP*, you can expect gre
 
 >To get developers started on building web and back-end applications using Packfire Framework and PHP Programming Language.  
 
-This book requires you to have some form of knowledge and basic foundation of programming to be able follow smoothly. If you come from another programming language (such as C#, Java or Python), you will be able to progress much faster with your current programming knowledge set. 
+This book requires you to have some form of knowledge and basic foundation of programming to be able follow smoothly. If you come from another programming language (such as C#, Java or Python), you will progress much faster with your current programming knowledge. 
 
 ##<a name="guide-intro"></a>Introduction
 
@@ -147,7 +147,7 @@ In the Application Front Controller, there is a line that defines the `__ENVIRON
 
 You can modify the constant according to where the application is currently located. For example, 'local' for local development server and 'test' for the test server.
 
-Whenever an environment is specified, the configuration file set for the environment will be loaded instead of the default one. For example if the environment is set to 'test', Packfire will look for and load 'app.test.yml' first. If the contextual configuration file is not found, it will fallback to load the default one, i.e. 'app.yml'.
+Whenever an environment is specified, the configuration file set for the environment will be loaded instead of the default one. For example if the environment is set to 'test', Packfire will look for and load 'app.test.yml' first. If the contextual configuration file is not found, it will load the default one, i.e. 'app.yml'.
 
 ###<a name="guide-configure-3"></a>app.yml Configuration File
 
@@ -184,9 +184,9 @@ You can manage all your URL route definitions in the `routing.yml` configuration
 
 - `themeSwitch`: this is the routing key, which uniquely identifies the routing entry.
 - `rewrite`: the rewritten URL. You can enter parameters in the URL like templates.
-- `actual`: The actual controller and action to be executed. You can leave out the "Controller" at the end of the class name. The `:` separates the class name and the action name. The action name is optional and if left out the default action name "index" is used.
-- `method`: The HTTP method that the route is catered for. 
-- `params`: The hash map of parameters with its regular expression.
+- `actual`: The actual controller and action to be executed. You can leave out the "Controller" at the end of the class name. The `:` separates the class name and the action name. The action name is optional and if left out the default action name "index" is used
+- `method`: The HTTP method that the route is catered for
+- `params`: The hash map of parameters with its regular expression
 
 The routing package in Packfire is powerful. Each parameter is parsed with regular expressions, which allows you to filter and validate your input data in the URL at the first stage.
 
@@ -202,15 +202,17 @@ While usage of an IDE is be subjected to your preference, it is still recommende
 
 Packfire was developed with the great help of NetBeans IDE. You can use any PHP IDE or editor of your choice. 
 
-###Coding Standards
+###<a name="guide-standards"></a>Development Standards
+
+Conforming to standards of development helps everyone to understand each other's code better. Sometimes bugs and problems are easily caused by a small naming problem in the code and takes hours to be discovered. It is therefore of more efficiency that a standard way of development is published and adhered to. 
 
 ####PHP File Formatting
 
 PHP files in Packfire are to be strictly used for PHP codes. No HTML or whitespaces must be embeded outside of the PHP code is allowed. PHP files must start with `<?php` and the trailing `?>` is not permitted. Short PHP tags or ASP-style tags are not allowed.
 
-It is recommended that the maximum length of your lines should be at 80 characters maximum. You should break for a new line if your line exceeds 80 characters. In NetBeans and most IDE, a line is shown at the end of the 80th character to indicate the limit.
+It is recommended that the maximum length of your lines should be at 80 characters. You should break for a new line if your line exceeds 80 characters. In NetBeans and most IDE, a line is shown at the end of the 80th character to indicate the limit.
 
-Indentation must be of 4 spaces. Tabs messes up codes.
+Indentation must be of 4 spaces. Tabs messes up codes across platforms.
 
 Only one class per file is allowed. Functions are to be declared in a separate PHP file from the classes.
 
@@ -240,7 +242,17 @@ Camel Casing refers to naming convention that requires each word in the name to 
 
 ###Class Loader
 
+Packfire uses the `pClassLoader` class to load files and classes.  However, a helper function `pload` was created to assist in the loading of classes.
+
+At the top of your PHP files, you can write the `pload()` statements to load the classes that your class in that file will use or depend on by supplying the package and class name. 
+
+>If your class is in `/pack/library/mailer/SmtpMailer.php`, the full package name would be `library.mailer.SmtpMailer`. However if the class you want to load is from the Packfire Framework, you have to append the `packfire.` in front, e.g. `packfire.plinq.pLinq`. 
+
+Once advantage is that pload allows you to supply wildcards to load multiple classes in one statement. For example, `library.drivers.*Driver` would load all classes in the '/pack/library/drivers' folder with name that ends with 'Driver'.
+
 ###In-Code Documentation
+
+Packfire classes and methods contains in-code PHPDoc documentation that you have access to. In NetBeans IDE, as you type along, documentation shows up to tell you what parameters, for example, are for the method you are writing. 
 
 ##<a name="guide-mvc"></a>Model-View-Controller Architecture
 
