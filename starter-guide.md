@@ -27,7 +27,14 @@ This work is digitally released in the form of a computer file under the [Creati
    3. [app.yml Configuration File](#guide-configure-3)
    4. [ioc.yml Configuration File](#guide-configure-4)
    5. [routing.yml Configuration File](#guide-configure-5)
- 6. [Model-View-Controller Architecture](#guide-mvc)
+ 6. [Programming in Packfire](#guide-programming)
+   1. [Integrated Development Environment / Editor](#guide-ide)
+   2. [Development Standards](#guide-standards)
+     1. [PHP File Formatting](#guide-formatting)
+     2. [Naming Convention](#guide-naming)
+   3. [Class Loading](#guide-class-loader)
+   4. [In-Code Documentation](#guide-code-help)
+ 7. [Model-View-Controller Architecture](#guide-mvc)
    1. [Models](#guide-mvc-models)
      1. [Modelling Your Application](#guide-mvc-modelling)
      2. [Model Tips](#guide-mvc-modeltips)
@@ -37,8 +44,9 @@ This work is digitally released in the form of a computer file under the [Creati
    3. [Controllers](#guide-mvc-controllers)
      1. [Controller Actions](#guide-mvc-actions)
      2. [Model and View](#guide-mvc-model-view)
- 7. What's next?
- 8. Glossary
+     3. [State Transference](#guide-mvc-state)
+ 8. What's next?
+ 9. Glossary
 
 
 ##<a name="guide-preface"></a>Preface
@@ -184,9 +192,55 @@ The routing package in Packfire is powerful. Each parameter is parsed with regul
 
 ##Programming in Packfire
 
-###Naming Convention
+There are several things you should take note when programming in Packfire as it may be a little different from your preferred language or framework. As you go through the topics in this chapter you will feel more comfortable developing your application.
+
+###Integrated Development Environment / Editor
+
+An Integrated Development Environment, or IDE for short, is application that aids you in your software development cycle. As there may be many things to handle, an IDE helps you to break down your software project for easier management.
+
+While usage of an IDE is be subjected to your preference, it is still recommended that an IDE is used when in development of a software application as it reduces chances of silly bugs, provides tools and features that speeds up development and helps you in debugging.
+
+Packfire was developed with the great help of NetBeans IDE. You can use any PHP IDE or editor of your choice. 
+
+###Coding Standards
+
+####PHP File Formatting
+
+PHP files in Packfire are to be strictly used for PHP codes. No HTML or whitespaces must be embeded outside of the PHP code is allowed. PHP files must start with `<?php` and the trailing `?>` is not permitted. Short PHP tags or ASP-style tags are not allowed.
+
+It is recommended that the maximum length of your lines should be at 80 characters maximum. You should break for a new line if your line exceeds 80 characters. In NetBeans and most IDE, a line is shown at the end of the 80th character to indicate the limit.
+
+Indentation must be of 4 spaces. Tabs messes up codes.
+
+Only one class per file is allowed. Functions are to be declared in a separate PHP file from the classes.
+
+####Naming Conventions
+
+Naming convention sets the style of naming our files, classes, interfaces, methods, functions, variables, constants etc. Packfire follows a naming convention close to Java, C# and Zend that is easily adaptable by users widely. Naming has to be meaningful, descriptive and easily understandable by others. 
+
+  - **Classes**
+    - Camel Casing with first letter in upper case singular, e.g. `PdfReader`, `BookListView`, `HtmlValidator`, `Debugger`
+    - Framework classes follow the above rule, and are prefixed with a lower case 'p' singular, e.g. `pApplication`, `pDateTime`, `pDebuggerOutput`
+  - **Interfaces**
+    - Camel Casing with first letter in upper case and prefixed with upper case 'I' singular, e.g. `IRunnable`, `ILinq`, `IHtmlOutput`
+  - **Files**
+    - PHP class: Exact name as the class that the file is holding.
+    - PHP misc: Camel casing with first letter in lower case, singular.
+    - Other files: Camel casing with first letter in lower case.
+    - Folders: Camel casing with first letter in lower case, singular.
+  - **Methods and Functions**
+    - Camel Casing with first letter in lower case, e.g. `renderOutput`, `verifyUser`, `runCode`
+  - **Variables**
+    - Camel Casing with first letter in lower case, e.g. `state`, `pointData`, `tableBuffer`
+  - **Constants**
+    - All in upper casing with underscore breaking the words, e.g. `STATUS_DENIED`, `TYPE_FULL`, `ORANGE`
+    - Packfire constants follow the above rule, and are indicated with a double underscore prefix and suffix, e.g. `__ENVIRONMENT__`, `__PACKFIRE_ROOT__`
+
+Camel Casing refers to naming convention that requires each word in the name to have its first letter in upper case, example: CopyFiles, HtmlCode, JavaScript. 
 
 ###Class Loader
+
+###In-Code Documentation
 
 ##<a name="guide-mvc"></a>Model-View-Controller Architecture
 
@@ -342,9 +396,9 @@ For example if your controller is 'Book' and your action is 'List', the controll
   - /pack/view/book/BookListView.php
   - /pack/view/BookListView.php
 
-####State Transference
+####<a name="guide-mvc-state"></a>State Transference
 
-
+In your controller, there is a property called `$state`. The state property allows you to store information that is automatically transferred to your View when the `render()` method is called. You can store, for example, an array of books that is to be displayed by the View.
 
 ##What's Next?
 
