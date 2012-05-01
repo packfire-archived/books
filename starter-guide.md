@@ -29,11 +29,14 @@ This work is digitally released in the form of a computer file under the [Creati
    5. [routing.yml Configuration File](#guide-configure-5)
  6. [Model-View-Controller Architecture](#guide-mvc)
    1. [Models](#guide-mvc-models)
-     1. [Example](#guide-mvc-models-example)
+     1. [Modelling Your Application](#guide-mvc-modelling)
+     2. [Model Tips](#guide-mvc-modeltips)
    2. [Views](#guide-mvc-views)
      1. [Templates](#guide-mvc-templates)
      2. [Themes](#guide-mvc-themes)
    3. [Controllers](#guide-mvc-controllers)
+     1. [Controller Actions](#guide-mvc-actions)
+     2. [Model and View](#guide-mvc-model-view)
  7. What's next?
  8. Glossary
 
@@ -42,7 +45,7 @@ This work is digitally released in the form of a computer file under the [Creati
 
 **Thank you** for taking time to start on your development journey with Packfire Framework for PHP.
 
-In this book *Starters' Guide to Packfire Framework for PHP*, you can expect great help and guidance to get you started in developing your application for the vast cloud and network of Internet. The goal of this book is simple:
+In this book *Starters' Guide to Packfire Framework for PHP*, you can expect great help and guidance to get you started in developing your application for the vast cloud and network of Internet. The purpose and goal of this book is simple:
 
 >To get developers started on building web and back-end applications using Packfire Framework and PHP Programming Language.  
 
@@ -166,7 +169,7 @@ You can manage all your URL route definitions in the `routing.yml` configuration
       rewrite: "/theme/switch/{theme}"
       actual: "ThemeSwitch:switch"
       method: 
-	- get
+	    - get
         - post
       params:
         theme: "([a-zA-Z0-9]+)"
@@ -178,6 +181,12 @@ You can manage all your URL route definitions in the `routing.yml` configuration
 - `params`: The hash map of parameters with its regular expression.
 
 The routing package in Packfire is powerful. Each parameter is parsed with regular expressions, which allows you to filter and validate your input data in the URL at the first stage.
+
+##Programming in Packfire
+
+###Naming Convention
+
+###Class Loader
 
 ##<a name="guide-mvc"></a>Model-View-Controller Architecture
 
@@ -196,22 +205,25 @@ Models are classes that holds your application knowledge and data. They can form
 >  
 > -- [Model–view–controller, Wikipedia](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 
-####Model Hints
+####<a name="guide-mvc-modelling"></a>Modelling Your Application
 
-If you are using LINQ to build your database queries (i.e. the `IDbLinq` class), you make your model class an instance of the `packfire.database.pDbModel` class and supply your model into the LINQ query through the `model()` method. This will help you define all the columns and properties mapping in the query.
-
-    $admins = $this->service('database')->from('users')
-                ->model($this->model('User'))
-                ->where('User.Admin = 1')
-                ->fetch();
-
-####<a name="guide-mvc-models-example"></a>Example
+It is good practice that you break down your application for high cohesion in classes and low coupling between classes (the concept of OOP). Identifying key models in your application can help you to reduce your coding time, prevent potential bugs and loopholes and ease debugging.
 
 For example, in the case of a web-based library, you may find the `Book` class as a Model for a physical book, storing the book title, `Author` object and ISBN number.
 
 In Packfire, you can place your Models in the `pack/model` folder. This will allow your controller to load the models through the `model()` method. You can write the following code in your Controller to load your models.
 
     $instance = $this->model('Book');
+
+####<a name="guide-mvc-modeltips"></a>Model Tips
+
+If you are using LINQ to build your database queries (i.e. the `IDbLinq` class), you make your model class an instance of the `packfire.database.pDbModel` class and supply your model into the LINQ query through the `model()` method. This will help you define all the columns and properties mapping in the query.
+
+    $availableBooks = $this->service('database')->from('books')
+                ->model($this->model('Book'))
+                ->where('quantity > :quota')
+                ->param('quota', 5)
+                ->fetch();
 
 Subsequently after loading the model, you can create additional instances through the standard PHP `new` keyword in your Controller:
 
@@ -229,19 +241,18 @@ The View component of Packfire separates your View manipulation logic and HTML c
 
 You can write your view rendering logic in and by overriding the `create()` method of your view class. Call the `define()` to set values to your template tags.
 
-    class HomeIndexView extends AppView {
+    class BookListView extends AppView {
         protected function create() {
             $theme = $this->service('session')->get('theme', 'dark');
             if(!in_array($theme, array('dark', 'light'))){
                 $theme = 'light';
             }
-            $this->theme($theme);
+            $this->template('BookList')->theme($theme);
             
-            $this->define('title', $this->state['title']);
-            $this->define('message', $this->state['message']);
+            $this->define('title', 'Book List');
+            $this->define('books', $this->state['books']);
             
             $this->filter('title', 'htmlentities|trim');
-            $this->filter('message', 'htmlentities|trim');
         }
     }
 
@@ -275,12 +286,12 @@ You can define your theme classes in the '/pack/theme' folder, extending from `p
 
 The concept is simple: All your themes will define the variables required to constitute your theme, for example background colour. So in your theme classes:
 
-**DarkTheme**:
+**Dark Theme**:
 
     $this->define('backgroundClr', '666');
     $this->define('foregroundClr', 'FFF');
 
-**LightTheme**:
+**Light Theme**:
 
     $this->define('backgroundClr', 'DDD');
     $this->define('foregroundClr', '222');
@@ -296,6 +307,45 @@ To put these variables onto your template, simply use the `theme.variable` tags,
 
 ###<a name="guide-mvc-controllers"></a>Controllers
 
-The controller is the heart of your web application. In your controllers lie the logic and actions that interact with the users' requests. You can use the routing functionalities to direct URL requests to controllers and its actions.
+The controller is the heart of your web application. In your controllers lie the logic and actions that interact with the users' requests. Controllers interact with your application models, database, users authentication, set data to views and implement functionalities for your application. You can use the routing functionalities to direct URL requests to controllers and its actions. 
 
-Controllers interact with your application models, database, users authentication, set data to views and implement functionalities for your application.
+In your Packfire Application, controllers classes are placed in the '/pack/controller' folder and all controllers extend from the `AppController` class.
+
+####<a name="guide-mvc-actions"></a>Controller Actions
+
+Application and business logic are all placed within actions of the controller. For each of your action, you will need to give a name to it. For example, the Book controller may have the actions `view` for viewing details on a book, `list` for listing all the books, `create` for adding a new book and `delete` for removing a book.
+
+Actions are, simply put, methods of your controller class. Their names are prefixed by `do` (i.e. `doView`, `doList`, `doCreate`, `doDelete`) and can be accessed by any HTTP request methods.  
+
+The prefix can also be the HTTP methods that can access it. For example you can define the method `getDelete()` to display a confirmation page on the deletion of a book and the method `postDelete()` to actually delete the book and redirect the user back to the book list page.
+
+>Packfire is RESTful. In the routing configuration, you can determine what HTTP request methods your action can be called be called from. For example, you can define that `create` can be only accessed by HTTP POST. 
+
+####<a name="guide-mvc-model-view"></a>Model and View
+
+Since Controller contains the application and business logic in your application, it has the right to use, mold and manipulate the other components of the architecture: Model and View. 
+
+Earlier on we said that you can load models through the `model()` method in controllers:
+
+    $this->model('Book');
+
+The `model()` method will include the file (in this case '/pack/model/Book.php') and create a new instance. The instance would then be stored in the controller. The next time you call the `model()` method it will return you the stored instance, unless the reload parameter is set to `true`.
+
+Once you are done with your controller action, you can load the view by calling the `render()` method in your controller:
+
+    $this->render(new BookListView()); // BookkListView is an instance of the pView
+
+You can also let the `render()` method to automatically load the view class by not passing any parameters. The controller will then look for a view class with the matching controller and action name in the view folder.
+
+For example if your controller is 'Book' and your action is 'List', the controller will look for:
+
+  - /pack/view/book/BookListView.php
+  - /pack/view/BookListView.php
+
+####State Transference
+
+
+
+##What's Next?
+
+##Glossary
