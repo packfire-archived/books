@@ -2,7 +2,7 @@
 
 **Authors**:
 
-  - Sam-Mauris Yong &lt;mauris*@*hotmail.sg&gt;
+  - Sam-Mauris Yong &lt;mauris@hotmail.sg&gt;
 
 **Status**: Work-In-Progress  
 
@@ -76,8 +76,8 @@ Installing Packfire Framework involves 3 simple steps to follow:
 
 Download a copy of the `.zip` or `.tar.gz` archive of the entire `master` branch code base from Github `packfire/framework` in the Downloads section.
 
->![Downloading Packfire from Github.](http://i.imgur.com/sDAkt.png)  
-Downloading Packfire from Github.
+>![Downloading Packfire from Github.](http://i.imgur.com/sDAktl.png)  
+>Downloading Packfire from Github.
 
 Alternatively, you can also clone the repository from Github by running the following Git command:
 
@@ -109,8 +109,8 @@ For example if I put my framework folder to 'C:\apps\packfire', I would set my `
 
 Congratulations! Now that you have completed the 3 steps of installation, you should be able to open Packfire on your browser and a welcome screen will show up:
 
->![Packfire Framework Welcome Screen](http://i.imgur.com/38nQw.png)  
-Packfire Framework Welcome Screen
+>![Packfire Framework Welcome Screen](http://i.imgur.com/L1UpEl.png)  
+>Packfire Framework Welcome Screen
 
 ##<a name="guide-configure"></a>Configurating your application
 
@@ -185,7 +185,8 @@ Model-View-Controller (MVC) is a system architectural design that focuses on Sep
 
 Packfire is designed to be a Push MVC framework. Take a look at the diagram below to understand how MVC is designed in Packfire.
 
-![Packfire MVC Architectural Design](http://i.imgur.com/v7yGDl.png)
+>![Packfire MVC Architectural Design](http://i.imgur.com/v7yGDl.png)  
+>Packfire's Push MVC Architectural Design
 
 ###<a name="guide-mvc-models"></a>Models
 
@@ -194,6 +195,15 @@ Models are classes that holds your application knowledge and data. They can form
 >The model is a collection of classes that form a software application intended to store, and optionally separate, data.  
 >  
 > -- [Model–view–controller, Wikipedia](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
+
+####Model Hints
+
+If you are using LINQ to build your database queries (i.e. the `IDbLinq` class), you make your model class an instance of the `packfire.database.pDbModel` class and supply your model into the LINQ query through the `model()` method. This will help you define all the columns and properties mapping in the query.
+
+    $admins = $this->service('database')->from('users')
+                ->model($this->model('User'))
+                ->where('User.Admin = 1')
+                ->fetch();
 
 ####<a name="guide-mvc-models-example"></a>Example
 
@@ -216,6 +226,26 @@ Subsequently after loading the model, you can create additional instances throug
 To help you manage your application's view classes easily, Packfire has included functionalities that allow you to create and reuse view. The `pView` abstract class prepares the data loaded by the controller for the template to parse.
 
 The View component of Packfire separates your View manipulation logic and HTML code, which allows web designers and developers to work on front-end development with more ease and haste as PHP view formatting codes are isolated from the HTML code.
+
+You can write your view rendering logic in and by overriding the `create()` method of your view class. Call the `define()` to set values to your template tags.
+
+    class HomeIndexView extends AppView {
+        protected function create() {
+            $theme = $this->service('session')->get('theme', 'dark');
+            if(!in_array($theme, array('dark', 'light'))){
+                $theme = 'light';
+            }
+            $this->theme($theme);
+            
+            $this->define('title', $this->state['title']);
+            $this->define('message', $this->state['message']);
+            
+            $this->filter('title', 'htmlentities|trim');
+            $this->filter('message', 'htmlentities|trim');
+        }
+    }
+
+> A sample View class in Packfire
 
 ####<a name="guide-mvc-templates"></a>Templates
 
@@ -245,22 +275,22 @@ You can define your theme classes in the '/pack/theme' folder, extending from `p
 
 The concept is simple: All your themes will define the variables required to constitute your theme, for example background colour. So in your theme classes:
 
--- DarkTheme:
+**DarkTheme**:
 
-    $this->define('backgroundClr', '#666');
-    $this->define('foregroundClr', '#FFF');
+    $this->define('backgroundClr', '666');
+    $this->define('foregroundClr', 'FFF');
 
--- LightTheme:
+**LightTheme**:
 
-    $this->define('backgroundClr', '#DDD');
-    $this->define('foregroundClr', '#222');
+    $this->define('backgroundClr', 'DDD');
+    $this->define('foregroundClr', '222');
 
-To put these variables onto your template, simply use the `theme.{variable}` tags, for example using Moustache:
+To put these variables onto your template, simply use the `theme.variable` tags, for example using Moustache:
 
     <style type="text/css">
         body{
-            background-color:{{theme.backgroundClr}};
-            color:{{theme.foregroundClr}};
+            background-color: #{{theme.backgroundClr}};
+            color: #{{theme.foregroundClr}};
         }
     </style>
 
