@@ -4,11 +4,11 @@
 
   - Sam-Mauris Yong &lt;mauris@hotmail.sg&gt;
 
-**Status**: Work-In-Progress  
+**Status**: Editing In Progress
 
 **For Versions**: 1.0-sofia
 
-Copyright © 2010-2012, Sam-Mauris Yong. All rights reserved. 
+*Copyright © 2010-2012, Sam-Mauris Yong. All rights reserved.*
 
 This work is digitally released in the form of a computer file under the [Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License](http://creativecommons.org/licenses/by-nc-nd/3.0/). Redistribution of this file through digital means is permitted provided that this copyright notice, license notice and this paragraph is retained in the copies.
 
@@ -24,9 +24,9 @@ This work is digitally released in the form of a computer file under the [Creati
  5. [Configurating your application](#guide-configure)
    1. [Configuration Formats](#guide-configure-1)
    2. [Contextual Configuration Loading](#guide-configure-2)
-   3. [app.yml Configuration File](#guide-configure-3)
-   4. [ioc.yml Configuration File](#guide-configure-4)
-   5. [routing.yml Configuration File](#guide-configure-5)
+   3. [Application Configuration File](#guide-configure-3)
+   4. [IoC Bucket Configuration File](#guide-configure-4)
+   5. [URL Routing Configuration File](#guide-configure-5)
  6. [Programming in Packfire](#guide-programming)
    1. [Integrated Development Environment / Editor](#guide-ide)
    2. [Development Standards](#guide-standards)
@@ -37,7 +37,7 @@ This work is digitally released in the form of a computer file under the [Creati
  7. [Model-View-Controller Architecture](#guide-mvc)
    1. [Models](#guide-mvc-models)
      1. [Modelling Your Application](#guide-mvc-modelling)
-     2. [Model Tips](#guide-mvc-modeltips)
+     2. [LINQ with Models](#guide-mvc-modeltips)
    2. [Views](#guide-mvc-views)
      1. [Templates](#guide-mvc-templates)
      2. [Themes](#guide-mvc-themes)
@@ -45,8 +45,8 @@ This work is digitally released in the form of a computer file under the [Creati
      1. [Controller Actions](#guide-mvc-actions)
      2. [Model and View](#guide-mvc-model-view)
      3. [State Transference](#guide-mvc-state)
- 8. What's next?
- 9. Glossary
+ 8. [What's next?](#guide-next)
+ 9. [Index](#guide-index)
 
 
 ##<a name="guide-preface"></a>Preface
@@ -69,11 +69,15 @@ A framework provides a well-designed and structured way to develop applications 
 
 As Packfire facilitates Object-Oriented Programming (OOP), coming from an OOP language would be greatly beneficial to your learning process.
 
+>Object Oriented Programming is a programming style that uses objects to structure the programming code and design applications and software. Principals of OOP include: data abstraction, encapsulation, modularity, re-usability, polymorphism, inheritance, high cohesion and low coupling. 
+
+Packfire Framework currently houses comfortably on GitHub as a free and open-source software versioned using Git and licensed out through New BSD License and Creative Commons License. 
+
 ##<a name="guide-require"></a>Requirements
 
 Packfire Framework relies on several other software and components to work on your server or computer. Without meeting the following criteria, Packfire cannot run your application properly.
 
- - A Web Server capable of running PHP (e.g. Apache HTTP Server, Lighttpd, IIS)
+ - A Web Server capable of running PHP (e.g. Apache HTTP Server, Lighttpd, IIS) and serve Hypertext Transfer Protocol (HTTP)
  - PHP Hypertext Preprocessor (PHP) 5.3.1 or higher
  - mod_rewrite needs to be enabled
 
@@ -149,13 +153,13 @@ You can modify the constant according to where the application is currently loca
 
 Whenever an environment is specified, the configuration file set for the environment will be loaded instead of the default one. For example if the environment is set to 'test', Packfire will look for and load 'app.test.yml' first. If the contextual configuration file is not found, it will load the default one, i.e. 'app.yml'.
 
-###<a name="guide-configure-3"></a>app.yml Configuration File
+###<a name="guide-configure-3"></a>Application Configuration File
 
 `app.yml` configuration file contains the application, session and database configuration settings.
 	
-###<a name="guide-configure-4"></a>ioc.yml Configuration File
+###<a name="guide-configure-4"></a>IoC Bucket Configuration File
 
-The `ioc.yml` configuration file sets all the services that will be loaded into the IoC Service Bucket whenever the application runs. These services will be accessible to all your controllers and classes use the IoC service bucket.
+The `ioc.yml` configuration file sets all the services that will be loaded into the Inversion of Control (IoC) Service Bucket whenever the application runs. These services will be accessible to all your controllers and classes use the IoC service bucket.
 
 Each entry in the IoC configuration file is defined as:
 
@@ -167,7 +171,8 @@ Each entry in the IoC configuration file is defined as:
 
 The service can then be loaded from the service bucket through `$this->service('serviceName')` in your controller or view. Any service loaded into the bucket that requires the use of the bucket will be provided the access to do so.
 
-###<a name="guide-configure-5"></a>routing.yml Configuration File
+###<a name="guide-configure-5"></a>URL Routing Configuration File
+
 You can manage all your URL route definitions in the `routing.yml` configuration file. An example of a route entry in the routing configuration file:
 
     home: 
@@ -190,11 +195,11 @@ You can manage all your URL route definitions in the `routing.yml` configuration
 
 The routing package in Packfire is powerful. Each parameter is parsed with regular expressions, which allows you to filter and validate your input data in the URL at the first stage.
 
-##Programming in Packfire
+##<a name="guide-programming"></a>Programming in Packfire
 
 There are several things you should take note when programming in Packfire as it may be a little different from your preferred language or framework. As you go through the topics in this chapter you will feel more comfortable developing your application.
 
-###Integrated Development Environment / Editor
+###<a name="guide-ide"></a>Integrated Development Environment / Editor
 
 An Integrated Development Environment, or IDE for short, is application that aids you in your software development cycle. As there may be many things to handle, an IDE helps you to break down your software project for easier management.
 
@@ -240,7 +245,7 @@ Naming convention sets the style of naming our files, classes, interfaces, metho
 
 Camel Casing refers to naming convention that requires each word in the name to have its first letter in upper case, example: CopyFiles, HtmlCode, JavaScript. 
 
-###Class Loader
+###<a name="guide-class-loader"></a>Class Loader
 
 Packfire uses the `pClassLoader` class to load files and classes.  However, a helper function `pload` was created to assist in the loading of classes.
 
@@ -250,7 +255,7 @@ At the top of your PHP files, you can write the `pload()` statements to load the
 
 Once advantage is that pload allows you to supply wildcards to load multiple classes in one statement. For example, `library.drivers.*Driver` would load all classes in the '/pack/library/drivers' folder with name that ends with 'Driver'.
 
-###In-Code Documentation
+###<a name="guide-code-help"></a>In-Code Documentation
 
 Packfire classes and methods contains in-code PHPDoc documentation that you have access to. In NetBeans IDE, as you type along, documentation shows up to tell you what parameters, for example, are for the method you are writing. 
 
@@ -281,9 +286,9 @@ In Packfire, you can place your Models in the `pack/model` folder. This will all
 
     $instance = $this->model('Book');
 
-####<a name="guide-mvc-modeltips"></a>Model Tips
+####<a name="guide-mvc-modeltips"></a>LINQ with Models
 
-If you are using LINQ to build your database queries (i.e. the `IDbLinq` class), you make your model class an instance of the `packfire.database.pDbModel` class and supply your model into the LINQ query through the `model()` method. This will help you define all the columns and properties mapping in the query.
+Packfire offers you built-in Language Integrated Query (LINQ) feature that allows you to write and build queries in PHP. If you are using LINQ to build your database queries (i.e. the `IDbLinq` class), you make your model class an instance of the `packfire.database.pDbModel` class and supply your model into the LINQ query through the `model()` method. This will help you define all the columns and properties mapping in the query.
 
     $availableBooks = $this->service('database')->from('books')
                 ->model($this->model('Book'))
@@ -303,7 +308,7 @@ Subsequently after loading the model, you can create additional instances throug
 
 To help you manage your application's view classes easily, Packfire has included functionalities that allow you to create and reuse view. The `pView` abstract class prepares the data loaded by the controller for the template to parse.
 
-The View component of Packfire separates your View manipulation logic and HTML code, which allows web designers and developers to work on front-end development with more ease and haste as PHP view formatting codes are isolated from the HTML code.
+The View component of Packfire separates your View manipulation logic and Hypertext Transfer Markup Language (HTML) code, which allows web designers and developers to work on front-end development with more ease and haste as PHP view formatting codes are isolated from the HTML code.
 
 You can write your view rendering logic in and by overriding the `create()` method of your view class. Call the `define()` to set values to your template tags.
 
@@ -323,6 +328,8 @@ You can write your view rendering logic in and by overriding the `create()` meth
     }
 
 > A sample View class in Packfire
+
+Notice how you can chain the `theme` and `template()` easily.
 
 ####<a name="guide-mvc-templates"></a>Templates
 
@@ -371,6 +378,15 @@ To put these variables onto your template, simply use the `theme.variable` tags,
         }
     </style>
 
+You can set the theme in your View class by calling the `theme()` method:
+
+    $this->theme(new ChristmasTheme());
+
+or if you use the `AppView` class:
+
+    $this->theme('ChristmasTheme'); 
+    // loads the theme class file at /pack/theme/ChristmasTheme.php
+
 ###<a name="guide-mvc-controllers"></a>Controllers
 
 The controller is the heart of your web application. In your controllers lie the logic and actions that interact with the users' requests. Controllers interact with your application models, database, users authentication, set data to views and implement functionalities for your application. You can use the routing functionalities to direct URL requests to controllers and its actions. 
@@ -381,7 +397,7 @@ In your Packfire Application, controllers classes are placed in the '/pack/contr
 
 Application and business logic are all placed within actions of the controller. For each of your action, you will need to give a name to it. For example, the Book controller may have the actions `view` for viewing details on a book, `list` for listing all the books, `create` for adding a new book and `delete` for removing a book.
 
-Actions are, simply put, methods of your controller class. Their names are prefixed by `do` (i.e. `doView`, `doList`, `doCreate`, `doDelete`) and can be accessed by any HTTP request methods.  
+Actions are, simply put, methods of your controller class. Their names are prefixed by `do` (i.e. `doView`, `doList`, `doCreate`, `doDelete`) and can be accessed by any HTTP request methods, such as GET, POST, HEAD, DELETE, etc.  
 
 The prefix can also be the HTTP methods that can access it. For example you can define the method `getDelete()` to display a confirmation page on the deletion of a book and the method `postDelete()` to actually delete the book and redirect the user back to the book list page.
 
@@ -412,6 +428,126 @@ For example if your controller is 'Book' and your action is 'List', the controll
 
 In your controller, there is a property called `$state`. The state property allows you to store information that is automatically transferred to your View when the `render()` method is called. You can store, for example, an array of books that is to be displayed by the View.
 
-##What's Next?
+##<a name="guide-next"></a>What's Next?
 
-##Glossary
+Now that you have completed the *Starters' Guide to Packfire Framework for PHP*, you probably would have a basic grasp of how to develop an application with Packfire.
+
+If you are willing to lend us a hand, take a moment to visit [our repository](http://github.com/packfire). Feel free to fork our repositories, make changes and submit pull requests. We also do need your input and code reviews to help us improve and make Packfire better. 
+
+Only with your expertise and contributions, then can we keep Packfire Framework free for all developers to build websites and back-end systems quickly and easily. 
+
+Look out for our more advanced books on our book and reference publication repository at [http://github.com/packfire/books](http://github.com/packfire/books). You are also welcome to edit this book by forking the repository.
+
+**Thank you**,  
+ - Sam-Mauris Yong
+
+##<a name="guide-index"></a>Index
+
+###A
+
+- Actions, Controller: [Controller Actions](#guide-mvc-actions)
+- Architecture, MVC: [Model-View-Controller Architecture](#guide-mvc)
+
+###C
+
+- Class Loader: [Class Loader](#guide-class-loader)
+- Controller: [Controllers](#guide-mvc-controllers)
+- Configuration: [Configuring Your Application](#guide-configure)
+- Contextual Configuration: [Configuring Your Application](#guide-configure-2)
+- create(), View: [Views](#guide-mvc-views)
+
+###D
+
+- define(), `__ENVIRONMENT__` constant: [Contextual Configuration Loading](#guide-configure-2)
+- define(), `__PACKFIRE_PATH__` constant: [Setting Framework Path](#guide-install-3)
+- define(), Theme: [Themes](#guide-mvc-themes)
+- define(), View: [Views](#guide-mvc-views)
+- DELETE, HTTP: [Controller Actions](#guide-mvc-actions)
+- Documentation: [In-Code Documentation](#guide-code-help)
+
+###G
+
+- GET, HTTP: [Controller Actions](#guide-mvc-actions)
+
+###H
+
+- HEAD, HTTP: [Controller Actions](#guide-mvc-actions)
+- HTML: see Hypertext Transfer Markup Language
+- HTTP: see Hypertext Transfer Protocol
+- Hypertext Transfer Markup Language: [Views](#guide-mvc-views)
+- Hypertext Transfer Protocol: [Requirements](#guide-require)
+
+###I
+
+- IDE: see Integrated Development Environment
+- Indentation: [PHP Fle Formatting](##guide-formatting)
+- INI Configuration File Format: [Configuration Formats](#guide-configure-1)
+- Installing: [Installing Packfire](#guide-install)
+- Integrated Development Environment: [Integrated Development Environment / Editor](#guide-ide)
+- Inversion of Control: [IoC Bucket Configuration File](#guide-configure-4)
+- IoC: see Inversion of Control
+
+###L
+
+- Language Integrated Query: [LINQ with Models](#guide-mvc-modeltips)
+- LINQ: see Language Integrated Query
+
+###M
+
+- model(), Controller: [Model and View](#guide-mvc-model-view)
+- Model: [Models](#guide-mvc-models)
+- Model-View-Controller: [Model-View-Controller Architecture](#guide-mvc)
+- Moustache, Packfire: [Templates](#guide-mvc-templates)
+- Mustache: see Moustache, Packfire
+- MVC: see Model-View-Controller
+
+###N
+
+- NetBeans IDE: [Integrated Development Environment](#guide-ide)
+
+###O
+
+- Object Oriented Programming: [Introduction](#guide-intro)
+- OOP: see Object Oriented Programming
+
+###P
+
+- Packfire Framework: [Preface](#guide-preface)
+- PHP: see PHP Hypertext Preprocessor
+- PHP Hypertext Preprocessor: [Preface](#guide-preface)
+- PHPDoc: [In-Code Documentation](#guide-code-help)
+- Prefix, Controller Actions: [Controller Actions](#guide-mvc-actions)
+- POST, HTTP: [Controller Actions](#guide-mvc-actions)
+
+###R
+
+- render(), Controller: [Model and View](#guide-mvc-model-view)
+- Representational state transfer: [Controller Actions](#guide-mvc-actions)
+- REST: see Representational state transfer
+- Routing: [IoC Bucket Configuration File](#guide-configure-5)
+
+###S
+
+- service(), Controller, View: [IoC Bucket Configuration File](#guide-configure-4)
+- Service Bucket: [IoC Bucket Configuration File](#guide-configure-4)
+- State Transfer: [State Transference](#guide-mvc-state)
+- $state: see State Transfer
+
+###T
+
+- template(), View: [Templates](#guide-mvc-templates)
+- Template: [Templates](#guide-mvc-templates)
+- theme(), View: [Themes](#guide-mvc-themes)
+- Theme: [Themes](#guide-mvc-themes)
+
+###U
+
+- URL Routing: see Routing
+
+###V
+
+- View: [Views](#guide-mvc-views)
+
+###Y
+
+- YAML: [Configuration Formats](#guide-configure-1)
