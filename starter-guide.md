@@ -453,7 +453,7 @@ Look out for our more advanced books on our book and reference publication repos
 - Class Loader: [Class Loader](#guide-class-loader)
 - Controller: [Controllers](#guide-mvc-controllers)
 - Configuration: [Configuring Your Application](#guide-configure)
-- Contextual Configuration: [Configuring Your Application](#guide-configure-2)
+- Contextual Configuration: [Contextual Configuration Loading](#guide-configure-2)
 - create(), View: [Views](#guide-mvc-views)
 
 ###D
@@ -480,7 +480,7 @@ Look out for our more advanced books on our book and reference publication repos
 ###I
 
 - IDE: see Integrated Development Environment
-- Indentation: [PHP Fle Formatting](##guide-formatting)
+- Indentation: [PHP Fle Formatting](#guide-formatting)
 - INI Configuration File Format: [Configuration Formats](#guide-configure-1)
 - Installing: [Installing Packfire](#guide-install)
 - Integrated Development Environment: [Integrated Development Environment / Editor](#guide-ide)
