@@ -211,7 +211,7 @@ Packfire was developed with the great help of NetBeans IDE. You can use any PHP 
 
 Conforming to standards of development helps everyone to understand each other's code better. Sometimes bugs and problems are easily caused by a small naming problem in the code and takes hours to be discovered. It is therefore of more efficiency that a standard way of development is published and adhered to. 
 
-####PHP File Formatting
+####<a name="guide-formatting"></a>PHP File Formatting
 
 PHP files in Packfire are to be strictly used for PHP codes. No HTML or whitespaces must be embeded outside of the PHP code is allowed. PHP files must start with `<?php` and the trailing `?>` is not permitted. Short PHP tags or ASP-style tags are not allowed.
 
@@ -221,7 +221,7 @@ Indentation must be of 4 spaces. Tabs messes up codes across platforms.
 
 Only one class per file is allowed. Functions are to be declared in a separate PHP file from the classes.
 
-####Naming Conventions
+####<a name="guide-naming"></a>Naming Conventions
 
 Naming convention sets the style of naming our files, classes, interfaces, methods, functions, variables, constants etc. Packfire follows a naming convention close to Java, C# and Zend that is easily adaptable by users widely. Naming has to be meaningful, descriptive and easily understandable by others. 
 
