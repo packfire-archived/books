@@ -89,7 +89,7 @@ Installing Packfire Framework involves 3 simple steps to follow:
 
 ###<a name="guide-install-1"></a>Step 1 - Downloading / Cloning
 
-Download a copy of the `.zip` or `.tar.gz` archive of the entire `master` branch code base from Github `packfire/framework` in the Downloads section.
+Download a copy of the `.zip` or `.tar.gz` archive of the entire `master` branch code base from Github `packfire/framework` in the [Downloads](https://github.com/packfire/framework/downloads) section.
 
 >![Downloading Packfire from Github.](http://i.imgur.com/sDAktl.png)  
 >Downloading Packfire from Github.
