@@ -79,9 +79,13 @@ Packfire Framework relies on several other software and components to work on yo
 
  - A Web Server capable of running PHP (e.g. Apache HTTP Server, Lighttpd, IIS) and serve Hypertext Transfer Protocol (HTTP)
  - PHP Hypertext Preprocessor (PHP) 5.3.1 or higher
- - mod_rewrite needs to be enabled
+ - mod_rewrite (or URL rewriting add-on that uses `.htaccess`) needs to be enabled on the Web Server
 
 As you go along, you may require more software and components than what Packfire offer. For example, a database is not included in Packfire and you may need to use one (such as MySQL, SQLite, Redis, OrientDB). A driver is often then required in order for Packfire to link your application to the database.
+
+>Note: We were able to run Packfire on PHP 5.2. However, advanced funtionality such as Closures are not available in PHP 5.2 and lower, and therefore certain features of Packfire will not be available when running on PHP 5.2, such as LINQ. MySQL LINQ will still work as it is a query builder and does not use closures.
+
+On your local development environment, we recommend the usage of web server packages, such as [XAMPP](http://www.apachefriends.org/en/xampp.html), [WampServer](http://www.wampserver.com/en/) and [MAMP](http://www.mamp.info/en/index.html). These web server packages usually contain Apache HTTP Server, MySQL and PHP, and hence the acronym AMP in their names.
 
 ##<a name="guide-install"></a>Installing Packfire
 
@@ -89,14 +93,13 @@ Installing Packfire Framework involves 3 simple steps to follow:
 
 ###<a name="guide-install-1"></a>Step 1 - Downloading / Cloning
 
-Download a copy of the `.zip` or `.tar.gz` archive of the entire `master` branch code base from Github `packfire/framework` in the [Downloads](https://github.com/packfire/framework/downloads) section.
+You can get Packfire Framework's files and application structure from the official repository on Github by running the following Git command:
 
->![Downloading Packfire from Github.](http://i.imgur.com/sDAktl.png)  
->Downloading Packfire from Github.
+    git clone --recursive git@github.com:packfire/framework.git
 
-Alternatively, you can also clone the repository from Github by running the following Git command:
+Note that you cannot download Packfire directly as a ZIP or TAR.GZ file from Github Downloads as Packfire uses submodules to breakdown certain components into separate repositories. Github Downloads will only download the files in the Framework repository.
 
-    git clone git@github.com:packfire/framework.git
+The `--recursive` flag will perform the necessary initialization and update of the submodules in Packfire.
 
 ###<a name="guide-install-2"></a>Step 2 - Copying Files
 
