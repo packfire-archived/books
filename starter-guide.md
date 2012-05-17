@@ -19,8 +19,7 @@ This work is digitally released in the form of a computer file under the [Creati
  3. [Requirements](#guide-require)
  4. [Installing Packfire](#guide-install)
    1. [Downloading Packfire](#guide-install-1)
-   2. [Copying Files](#guide-install-2)
-   3. [Setting Framework Path](#guide-install-3)
+   2. [Using Installer](#guide-install-2)
  5. [Configurating your application](#guide-configure)
    1. [Configuration Formats](#guide-configure-1)
    2. [Contextual Configuration Loading](#guide-configure-2)
@@ -89,7 +88,7 @@ On your local development environment, we recommend the usage of web server pack
 
 ##<a name="guide-install"></a>Installing Packfire
 
-Installing Packfire Framework involves 3 simple steps to follow:
+Installing Packfire Framework involves 2 simple steps to follow:
 
 ###<a name="guide-install-1"></a>Step 1 - Downloading / Cloning
 
@@ -101,27 +100,25 @@ Note that you cannot download Packfire directly as a ZIP or TAR.GZ file from Git
 
 The `--recursive` flag will perform the necessary initialization and update of the submodules in Packfire.
 
-###<a name="guide-install-2"></a>Step 2 - Copying Files
+###<a name="guide-install-2"></a>Step 2 - Using Installer
 
-After you have downloaded a copy of the repository, there are two folders in the repository you need to take note of:
+Packfire features an intuitive installer that comes in both Command Line Interface (CLI) and Graphical User Interface (GUI). The installer comes with two main functionality: installing Packfire Framework and creating a Packfire Application.
 
-  - **packfire**: consists of the framework itself
-  - **public**: your application structure and a demo-application inside
+In the past, manual work was needed to copy the files and modifying the configuration. You now do not need to do them, they are pretty much automated and assisted through the Packfire Installer.
 
-Copy the **packfire** folder and its content to a non-public location (e.g. 'C:\packfire' or '/usr/local/packfire'). 
+####Command Line Interface (Console) Installer
 
-Then, copy the application structure of the **public** folder to your web server's document root folder (`htdocs`, `public_html` etc.). You can put it in sub-folders of your web-server document root folder instead of the root-folder itself.
+In the Framework folder ('packfire') that you have cloned from the repository, you can execute Packfire in CLI by calling the packfire command (in Windows, Linux and Mac - we have both the Batch and Shell files). To show the help for the CLI, simply run the command:
 
-###<a name="guide-install-3"></a>Step 3 - Setting the Framework Path
+> packfire
 
- 1. Open the `index.php` file, found in the root folder of your application, with your favourite PHP editor. The `index.php` file is called the Application Front Controller.
- 2. Modify the `__PACKFIRE_PATH__` constant and set it to where you put your **packfire** framework folder.
+The help screen will show the commands to run installation of the framework or creation of an application. 
 
->**Application Front Controller**: Packfire uses the Front Controller Pattern (FCP) to route all requests to the web application into a single file and hence allowing you to control all your URL routings through PHP without knowledge of writing and need to maintaining the `.htaccess` file. 
+**Note** that the CLI requires PHP to run: remember to set PHP to your PATH environment variable.
 
-For example if I put my framework folder to 'C:\apps\packfire', I would set my `__PACKFIRE_PATH__` constant to 'C:\apps\packfire' and it would look like this:
+####Graphical User Interface (Web) Installer
 
-    define('__PACKFIRE_PATH__', 'C:\apps\packfire');
+Load the files you just cloned into your web server directory. You can open up `index.php` in your web browser through your web server. It will redirect you to the installer page. The installer contains two options, Install Framework and Create Application. Follow the instructions on the interface to install the framework first, then create the application.
 
 ###Installaton Done!
 
