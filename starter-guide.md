@@ -94,7 +94,7 @@ Installing Packfire Framework involves 2 simple steps to follow:
 
 You can get Packfire Framework's files and application structure from the official repository on Github by running the following Git command:
 
-    git clone --recursive git@github.com:packfire/framework.git
+    git clone --recursive git://github.com/packfire/framework.git packfire
 
 Note that you cannot download Packfire directly as a ZIP or TAR.GZ file from Github Downloads as Packfire uses submodules to breakdown certain components into separate repositories. Github Downloads will only download the files in the Framework repository.
 
