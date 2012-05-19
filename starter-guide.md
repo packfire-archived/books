@@ -108,9 +108,18 @@ In the past, manual work was needed to copy the files and modifying the configur
 
 ####Command Line Interface (Console) Installer
 
-In the Framework folder ('packfire') that you have cloned from the repository, you can execute Packfire in CLI by calling the packfire command (in Windows, Linux and Mac - we have both the Batch and Shell files). To show the help for the CLI, simply run the command:
+After cloning the repository to your working copy, you can execute Packfire in CLI by calling the packfire command (in Windows, Linux and Mac - we have both the Batch and Shell files) that resides in the Framework folder ('packfire'). To show the help for the CLI, simply run the command:
 
-> packfire
+**Mac / Linux:**
+
+    $ cd packfire  
+    $ chmod +x packfire.sh  
+    $ ./packfire.sh  
+
+**Windows:**
+
+    > cd packfire  
+    > packfire  
 
 The help screen will show the commands to run installation of the framework or creation of an application. 
 
