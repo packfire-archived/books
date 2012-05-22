@@ -131,6 +131,8 @@ Load the files you just cloned into your web server directory. You can open up `
 
 ###Installaton Done!
 
+> Note that when you first open the application on your web browser, the images and stylesheets may fail to load because the application root URL is not configured during the installation. Configure the application root (`rootUrl`) in the `app.yml` configuration file.
+
 Congratulations! Now that you have completed the 3 steps of installation, you should be able to open Packfire on your browser and a welcome screen will show up:
 
 >![Packfire Framework Welcome Screen](http://i.imgur.com/L1UpEl.png)  
