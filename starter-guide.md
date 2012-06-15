@@ -106,6 +106,11 @@ Packfire features an intuitive installer that comes in both Command Line Interfa
 
 In the past, manual work was needed to copy the files and modifying the configuration. You now do not need to do them, they are pretty much automated and assisted through the Packfire Installer.
 
+After downloading, you can use the installer to:
+
+ 1. Install Packfire Framework to a non-public location.
+ 2. Create a Packfire Application to your web server public folder.
+
 ####Command Line Interface (Console) Installer
 
 After cloning the repository to your working copy, you can execute Packfire in CLI by calling the packfire command (in Windows, Linux and Mac - we have both the Batch and Shell files) that resides in the Framework folder ('packfire'). To show the help for the CLI, simply run the command:
@@ -121,7 +126,7 @@ After cloning the repository to your working copy, you can execute Packfire in C
     > cd packfire  
     > packfire  
 
-The help screen will show the commands to run installation of the framework or creation of an application. 
+The help screen will show the commands to run installation of the framework or creation of an application. Using the `-i` and `-c` commands will help you to install the framework and create an application instance respectively.
 
 **Note** that the CLI requires PHP to run: remember to set PHP to your PATH environment variable.
 
