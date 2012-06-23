@@ -130,6 +130,8 @@ The help screen will show the commands to run installation of the framework or c
 
 **Note** that the CLI requires PHP to run: remember to set PHP to your PATH environment variable.
 
+> A screencast guide on [how to install Packfire Framework on Linux using CLI](https://vimeo.com/samyong/packfire-linux-install) is available. 
+
 ####Graphical User Interface (Web) Installer
 
 Load the files you just cloned into your web server directory. You can open up `index.php` in your web browser through your web server. It will redirect you to the installer page. The installer contains two options, Install Framework and Create Application. Follow the instructions on the interface to install the framework first, then create the application.
