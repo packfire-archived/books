@@ -118,15 +118,14 @@ After cloning the repository to your working copy, you can execute Packfire in C
 **Mac / Linux:**
 
     $ cd packfire  
-    $ chmod +x packfire.sh  
-    $ ./packfire.sh  
+    $ sh packfire.sh 
 
 **Windows:**
 
     > cd packfire  
     > packfire  
 
-The help screen will show the commands to run installation of the framework or creation of an application. Using the `-i` and `-c` commands will help you to install the framework and create an application instance respectively.
+The help screen will show the commands to run installation of the framework or creation of an application. Using the `-i` and `-c` arguments, the script will help you to install the framework or create an application instance respectively.
 
 **Note** that the CLI requires PHP to run: remember to set PHP to your PATH environment variable.
 
