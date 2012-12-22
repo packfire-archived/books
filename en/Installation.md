@@ -22,14 +22,16 @@ Since version 2.0 onwards, Packfire was re-designed to be [Composer](http://getc
 
 Before installing Packfire, ensure that you familiarize yourself with Composer for a little. Composer comes in the form of a [phar binary](http://php.net/manual/en/intro.phar.php), which you can download from the website and run it with PHP. 
 
-##Installation Processes
+##Installing Packfire
 
-There are two main methods of installing Packfire Framework for your applications:
+There are two methods of installing Packfire Framework for your applications:
 
-1. Composer Installation: perform installation via Composer on the application and will be per-application basis.
-2. Global Installation: download and install one copy of Packfire Framework for PHP and link all applications on the system to this installation.
+1. **Composer Installation**: perform installation via Composer on the application and will be per-application basis.
+2. **Global Installation**: download and install one copy of Packfire Framework for PHP and link all applications on the system to this installation.
 
-##Composer Installation
+Read on to the following section on elaborated details on how to install Packfire.
+
+###Composer Installation
 
 Installation of the Framework for your Packfire application through the use of Composer allows you to reap several benefits including:
 
@@ -39,11 +41,12 @@ Installation of the Framework for your Packfire application through the use of C
 
 To install Packfire Framework through Composer:
 
-1. Download a copy of the Packfire Framework application structure from [the Github repository](https://github.com/packfire/app-structure).
+1. Download a copy of the Packfire Framework application structure from the [Github repository](https://github.com/packfire/app-structure).
   > You can either directly `git clone` then checkout a tag or click on "Tags" on the repository page and download the version you want to use.
-1. Execute command `php composer.phar install` on the `pack` folder of your application, where the `composer.json` file resides, to install Packfire Framework for your application.
 
-##Global Installation
+2. Execute command `php composer.phar install` on the `pack` folder of your application, where the `composer.json` file resides, to install Packfire Framework for your application.
+
+###Global Installation
 
 Packfire Framework can be installed globally on a system for access by one or more, if not all, Packfire applications on that system.
 
