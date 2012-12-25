@@ -2,8 +2,8 @@
 
 **Author(s):**
 
-- Sam-Mauris Yong (@thephpdeveloper)
-- Yuki Matsukura (@matsubo)
+- [Sam-Mauris Yong](https://github.com/thephpdeveloper)
+- [Yuki Matsukura](https://github.com/matsubo)
 
 **For version(s):**
 
