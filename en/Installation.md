@@ -22,7 +22,7 @@ Since version 2.0 onwards, Packfire was re-designed to be [Composer](http://getc
 
 Before installing Packfire, ensure that you familiarize yourself with Composer for a little. Composer comes in the form of a [phar binary](http://php.net/manual/en/intro.phar.php), which you can download from the website and run it with PHP. 
 
-##Installing Packfire
+##Installing Packfire Framework
 
 There are two methods of installing Packfire Framework for your applications:
 
@@ -62,13 +62,33 @@ To install Packfire Framework globally:
 4. Download a copy of the Packfire Framework application structure from [the Github repository](https://github.com/packfire/app-structure).
   > You can either directly `git clone` then checkout a tag or click on "Tags" on the repository page and download the version you want to use.
 
-5. Configure the `pack/constants.php` file by setting the constant `__PACKFIRE_ROOT__` to the `src` folder of Packfire Framework. 
-
 > Note that if you install Packfire Framework globally, you will be able to update the Framework through Composer. Updating will require a manual download and extraction similarly to the installation process. However, components used by Packfire Framework can still be updated through a Composer update done on the Framework itself. 
+
+
+##Setting up Packfire application structure
+
+1. Rename file from `pack/constants.php.dist` to `constants.php` and set the constant `__PACKFIRE_ROOT__` to the `src` folder of Packfire Framework.
+```
+mv pack/constants.php.dist pack/constants.php
+vi pack/constants.php
+```
+
+2. You will need a writable permisison by the owner of web server.
+```
+chmod -R 777 pack/storage
+```
+
+3. Configure the URL of the application.
+Set the top of the `app-structure` on the `app.rootUrl` key.
+```
+vi pack/config/app.yml
+```
+
 
 ##Completed Installation
 
-Upon completing the installation of your Packfire application and the Framework, the Welcome page should show up, showing the version number of Packfire Framework installed on the top right corner. You can combine a mix of Global and Composer installation processes depending on your needs for the application.
+
+Upon completing the installation of your Packfire application and the Framework, the Welcome page should show up when you access top of the `app-structure` directory, showing the version number of Packfire Framework installed on the top right corner. You can combine a mix of Global and Composer installation processes depending on your needs for the application.
 
 ![](http://i.imgur.com/CVoxh.png)
 
