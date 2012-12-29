@@ -68,21 +68,27 @@ To install Packfire Framework globally:
 
 ##Setting up Packfire application structure
 
-1. Rename file from `pack/constants.php.dist` to `constants.php` and set the constant `__PACKFIRE_ROOT__` to the `src` folder of Packfire Framework.
+Follow the steps below to set up your application:
+
+1. Rename file from `pack/constants.php.dist` to `constants.php`.
 ```
-mv pack/constants.php.dist pack/constants.php
-vi pack/constants.php
+$ mv pack/constants.php.dist pack/constants.php
+```
+
+2. If you use a Global Installation, set the constant `__PACKFIRE_ROOT__` to the `src` folder of your Packfire Framework installation.
+````
+$ vi pack/constants.php
 ```
 
 2. You will need a writable permisison by the owner of web server.
 ```
-chmod -R 777 pack/storage
+$ chmod -R 777 pack/storage
 ```
 
 3. Configure the URL of the application.
 Set the top of the `app-structure` on the `app.rootUrl` key.
 ```
-vi pack/config/app.yml
+$ vi pack/config/app.yml
 ```
 
 
