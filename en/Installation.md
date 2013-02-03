@@ -63,21 +63,15 @@ To install Packfire Framework globally:
 4. Download a copy of the Packfire Framework application structure from [the Github repository](https://github.com/packfire/app-structure).
   > You can either directly `git clone` then checkout a tag or click on "Tags" on the repository page and download the version you want to use.
 
-> Note that if you install Packfire Framework globally, you will be able to update the Framework through Composer. Updating will require a manual download and extraction similarly to the installation process. However, components used by Packfire Framework can still be updated through a Composer update done on the Framework itself. 
-
+> Note that if you install Packfire Framework globally, you will not be able to update the Framework through Composer. Updating will require a manual download and extraction similarly to the installation process. However, components used by Packfire Framework can still be updated through a Composer update done on the Framework itself. 
 
 ##Setting up Packfire application structure
 
 Follow the steps below to set up your application:
 
-1. Rename file from `pack/constants.php.dist` to `constants.php`.
-```
-$ mv pack/constants.php.dist pack/constants.php
-```
-
-2. If you use a Global Installation, set the constant `__PACKFIRE_ROOT__` to the `src` folder of your Packfire Framework installation.
+1. If you use a Global Installation, create a "packfire" file in your `pack` folder and enter the path to the `src` folder of your Packfire Framework installation.
 ````
-$ vi pack/constants.php
+$ echo "/home/Sam/packfire/src/" > "pack/packfire"
 ```
 
 2. You will need a writable permisison by the owner of web server.
